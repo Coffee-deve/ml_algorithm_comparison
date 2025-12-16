@@ -21,14 +21,10 @@
 knn-project
 ============
 
-A **from-scratch implementation of the k-Nearest Neighbors (K-NN) algorithm**
-developed for educational purposes and comparison with the implementation
+An implementation of the k-Nearest Neighbors (K-NN) algorithm and comparison with the implementation
 available in **scikit-learn**.
 
-This project was developed as part of the *Programming in Python Language*
-course at **AGH University of Krakow**.
-
-It includes:
+This project includes:
 
 - a custom implementation of the K-NN classification algorithm
 - support for multiple distance metrics (Euclidean, Manhattan, Minkowski)
@@ -138,6 +134,3 @@ This project was generated using **PyScaffold** and follows recommended best
 practices for Python project structure, testing, and documentation.
 
 For more information about PyScaffold see https://pyscaffold.org/.
-
-This project has been set up using PyScaffold 4.6. For details and usage
-information on PyScaffold see https://pyscaffold.org/.
