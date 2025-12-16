@@ -1,167 +1,143 @@
-knn-algorithm-project
+.. These are examples of badges you might want to add to your README:
+   please update the URLs accordingly
 
-A from-scratch implementation of the k-Nearest Neighbors (K-NN) algorithm with support for multiple distance metrics, visualization, and comparison against the reference implementation available in scikit-learn.
+    .. image:: https://api.cirrus-ci.com/github/<USER>/knn-project.svg?branch=main
+        :alt: Build Status
+        :target: https://cirrus-ci.com/github/<USER>/knn-project
+    .. image:: https://readthedocs.org/projects/knn-project/badge/?version=latest
+        :alt: ReadTheDocs
+        :target: https://knn-project.readthedocs.io/en/stable/
+    .. image:: https://img.shields.io/pypi/v/knn-project.svg
+        :alt: PyPI-Server
+        :target: https://pypi.org/project/knn-project/
 
-This project was developed as part of the Programming in Python Language course and demonstrates a complete machine-learning workflow including algorithm implementation, evaluation, testing, and documentation.
+.. image:: https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold
+    :alt: Project generated with PyScaffold
+    :target: https://pyscaffold.org/
 
-Project Features
+|
 
-The project includes:
+============
+knn-project
+============
 
-A custom K-NN implementation written from scratch (no sklearn logic reused)
+A **from-scratch implementation of the k-Nearest Neighbors (K-NN) algorithm**
+developed for educational purposes and comparison with the implementation
+available in **scikit-learn**.
 
-Support for multiple distance metrics:
+This project was developed as part of the *Programming in Python Language*
+course at **AGH University of Krakow**.
 
-Euclidean distance
+It includes:
 
-Manhattan distance
-
-Minkowski distance
-
-Multi-class classification (four classes: 0, 1, 2, 3)
-
-Direct comparison with scikit-learn’s KNeighborsClassifier
-
-Elbow Method visualization for selecting the optimal number of neighbors
-
-2D data visualization of training and test points
-
-Unit tests validating correctness and stability
-
-Fully documented code using Python docstrings
+- a custom implementation of the K-NN classification algorithm
+- support for multiple distance metrics (Euclidean, Manhattan, Minkowski)
+- comparison with ``sklearn.neighbors.KNeighborsClassifier``
+- visualization of data points and decision behavior
+- Elbow Method visualization for selecting the optimal number of neighbors ``k``
+- automated unit tests validating correctness of the implementation
 
 Project Structure
+=================
 
-The project follows the src/ layout recommended by PyScaffold:
+The project follows the ``src/`` layout recommended by PyScaffold:
 
-ml_algorithm_comparison/
-├── src/ml_algorithm_comparison/
-│   ├── __init__.py
-│   ├── knnCustom.py          # Custom K-NN implementation
-│   ├── knnSklearn.py         # scikit-learn wrapper
-│   ├── evaluation.py         # Accuracy comparison logic
-│   ├── visualization.py     # Data and result plots
-│   └── elbowMethod.py        # Elbow method implementation
-│
-├── tests/
-│   ├── testKnnComparison.py
-│   └── testKnnUnit.py
-│
-├── docs/
-│   ├── knnTheory.rst
-│   ├── implementation.rst
-│   └── comparison.rst
-│
-├── demoknn.py                # Runnable demo script
-├── README.rst
-├── CHANGELOG.rst
-└── pyproject.toml
+::
 
-Algorithm Overview
+    knn-project/
+    ├── src/ml_algorithm_comparison/
+    │   ├── __init__.py
+    │   ├── knnCustom.py
+    │   ├── knnSklearn.py
+    │   ├── evaluation.py
+    │   ├── visualization.py
+    │   └── elbowMethod.py
+    ├── tests/
+    │   └── testKnnComparison.py
+    ├── docs/
+    ├── CHANGELOG.rst
+    ├── README.rst
+    └── pyproject.toml
 
-The k-Nearest Neighbors algorithm is a non-parametric, instance-based learning method.
-For a given test point:
+Algorithm Description
+=====================
 
-The distance to all training points is computed
+The **k-Nearest Neighbors (K-NN)** algorithm is a non-parametric, instance-based
+learning method used for classification.
 
-The k closest neighbors are selected
+For each test point:
 
-The predicted class is determined by majority voting
+1. The distance to all training points is computed
+2. The ``k`` nearest neighbors are selected
+3. The predicted class is chosen by majority voting
 
-This project allows experimenting with different distance metrics and values of k, and visually inspecting their influence on classification performance.
+The project supports multiple distance metrics:
 
-Usage Example
-
-Basic usage of the custom K-NN model:
-
-import numpy as np
-from ml_algorithm_comparison.knnCustom import KNNCustom
-
-trainData = np.array([[1, 1], [2, 2], [6, 6]])
-trainLabels = np.array([0, 0, 1])
-
-model = KNNCustom(kNeighbors=3, distanceMetric="euclidean")
-model.fit(trainData, trainLabels)
-
-predictions = model.predict([[1.5, 1.7]])
+- **Euclidean distance**
+- **Manhattan distance**
+- **Minkowski distance**
 
 Comparison with scikit-learn
+============================
 
-The project includes a direct comparison between:
+The project provides a direct comparison between:
 
-Custom K-NN implementation
+- the custom ``KNNCustom`` implementation
+- ``sklearn.neighbors.KNeighborsClassifier``
 
-sklearn.neighbors.KNeighborsClassifier
+Both implementations are evaluated on the same datasets using identical
+parameters. Accuracy scores are reported and compared to validate correctness.
 
-Comparison metrics include:
+Usage Example
+=============
 
-Classification accuracy
+Basic usage of the custom K-NN model::
 
-Prediction consistency
+    import numpy as np
+    from ml_algorithm_comparison.knnCustom import KNNCustom
 
-Behavior for different k values
+    trainData = np.array([[1, 1], [2, 2], [3, 3], [6, 6]])
+    trainLabels = np.array([0, 0, 1, 1])
 
-Results are generated using identical datasets to ensure fairness.
+    model = KNNCustom(kNeighbors=3)
+    model.fit(trainData, trainLabels)
+
+    predictions = model.predict([[2.5, 2.5]])
 
 Visualization
+=============
 
-The project provides visual outputs to help understand K-NN behavior:
+The project includes visualization utilities that allow:
 
-Scatter plots of training and test points
+- plotting training and test data points in 2D space
+- visual inspection of class distributions
+- graphical comparison of clustering behavior
 
-Class-colored data visualization
-
-Elbow Method plot showing error rate vs. number of neighbors
-
-These plots help explain:
-
-how class boundaries form
-
-how the choice of k affects model performance
+Additionally, the **Elbow Method** is implemented to help select an optimal
+value for ``k`` by plotting the error rate as a function of ``k``.
 
 Testing
+=======
 
-The tests/ directory contains unit tests and integration tests that:
+Automated tests are provided using **pytest**.  
+Tests verify that:
 
-Validate distance calculations
+- the custom K-NN implementation runs correctly
+- predictions have valid output
+- accuracy values are within valid ranges
+- the comparison with scikit-learn executes successfully
 
-Ensure predictions are valid
+Tests can be run using::
 
-Verify comparison results are within expected bounds
+    pytest
 
-Tests can be run using:
-
-pytest
-
-
-or with tox:
-
-tox
-
-Documentation
-
-The docs/ directory contains:
-
-Algorithm theory explanation
-
-Detailed code walkthrough
-
-Comparison analysis with scikit-learn
-
-All source files include proper Python docstrings suitable for automatic documentation generation.
-
-Summary
-
-This project demonstrates:
-
-A correct and transparent implementation of the K-NN algorithm
-
-Proper software engineering practices
-
-Clear separation between algorithm, evaluation, visualization, and testing
-
-Compliance with academic requirements for documentation and reproducibility
+Note
 ====
+
+This project was generated using **PyScaffold** and follows recommended best
+practices for Python project structure, testing, and documentation.
+
+For more information about PyScaffold see https://pyscaffold.org/.
 
 This project has been set up using PyScaffold 4.6. For details and usage
 information on PyScaffold see https://pyscaffold.org/.
